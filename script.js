@@ -1,44 +1,13 @@
-var TOTAL = 8;
+/* ==========================================================================
+   AAI-E-MC1-S03-FAC01 — Facilitator Kit · slide navigation
+   Every slide fits one screen. Slides are grouped under the original 8
+   sections; the jump select goes to a section's first slide.
+   ========================================================================== */
+var sectionLabels = ["Cover","Before you deliver","Run sheet","Demo script","Wrong-answer protocol","Answer bank","Contingencies","Closing"];
+var slides = [];
 var current = 0;
-var pageLabels = ["Cover","Before you deliver","Run sheet","Demo script","Wrong-answer protocol","Answer bank","Contingencies","Closing"];
 
-function buildJump(){
-  var sel = document.getElementById('jumpSelect');
-  sel.innerHTML = '';
-  pageLabels.forEach(function(label, i){
-    var opt = document.createElement('option');
-    opt.value = i;
-    opt.textContent = (i+1) + '. ' + label;
-    sel.appendChild(opt);
-  });
-}
-
-function render(){
-  document.querySelectorAll('.page').forEach(function(p){
-    p.classList.toggle('active', parseInt(p.getAttribute('data-page')) === current);
-  });
-  document.getElementById('jumpSelect').value = current;
-  document.getElementById('pageCount').textContent = (current+1) + ' / ' + TOTAL;
-  document.getElementById('backBtn').disabled = (current === 0);
-  document.getElementById('nextBtn').disabled = (current === TOTAL-1);
-  window.scrollTo({top:0, behavior:'smooth'});
-}
-
-function changePage(delta){
-  var next = current + delta;
-  if(next < 0 || next > TOTAL-1) return;
-  current = next;
-  render();
-}
-
-function updateCheck(){
-  var boxes = document.querySelectorAll('.check-item input');
-  var checked = 0;
-  boxes.forEach(function(b){ if(b.checked) checked++; });
-  document.getElementById('checkProgress').textContent = checked + ' of ' + boxes.length + ' complete';
-}
-
-/* ================= RUN SHEET TIMELINE ================= */
+/* ================= RUN SHEET DATA ================= */
 var runBlocks = [
   {time:"0:00–0:15", title:"Opening and hook", exact:"\"Today isn't about whether AI is good or bad. It's about one habit: never send what you haven't checked.\"",
    guidance:"Introduce yourself and the session goal in your own words.",
@@ -77,44 +46,14 @@ var runBlocks = [
    action:"Learners flag errors and state consequences under time pressure.",
    evidence:"Lab findings and consequence answers.",
    recovery:"If the timer causes visible stress, quietly extend it rather than stopping the activity."},
-  {time:"4:30–5:00", title:"Closing, Rulebook check, questions", exact:"\"Before you leave, your Rulebook page for this section needs to be complete, not just started.\"",
+  {split:3, time:"4:30–5:00", title:"Closing, Rulebook check, questions", exact:"\"Before you leave, your Rulebook page for this section needs to be complete, not just started.\"",
    guidance:"Check each learner's Rulebook page and Practice Bot mastery status. Use the Answer Bank for last questions.",
    action:"Learners finalise and screenshot or print their Rulebook page.",
    evidence:"Completed Rulebook page, Practice Bot mastery, Lab logs.",
    recovery:"If a learner is not yet at mastery, note it and schedule a short follow-up rather than passing them through."}
 ];
 
-function buildTimeline(){
-  var wrap = document.getElementById('timelineWrap');
-  wrap.innerHTML = '';
-  runBlocks.forEach(function(b, i){
-    if(b.isBreak){
-      var brk = document.createElement('div');
-      brk.className = 'break-block';
-      brk.textContent = b.time + ' — Break';
-      wrap.appendChild(brk);
-      return;
-    }
-    var block = document.createElement('div');
-    block.className = 'tblock';
-    var exactHtml = b.exact ? '<div class="trow"><span class="tlabel">Say exactly</span><span class="tval"><div class="exact-line">'+b.exact+'</div></span></div>' : '';
-    block.innerHTML =
-      '<div class="thead" onclick="this.parentElement.classList.toggle(\'open\')">'+
-        '<span class="ttime">'+b.time+'</span><span class="ttitle">'+b.title+'</span>'+
-        '<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>'+
-      '</div>'+
-      '<div class="tbody"><div class="tbody-inner">'+
-        exactHtml+
-        '<div class="trow"><span class="tlabel">Guidance</span><span class="tval">'+b.guidance+'</span></div>'+
-        '<div class="trow"><span class="tlabel">Learner action</span><span class="tval">'+b.action+'</span></div>'+
-        '<div class="trow"><span class="tlabel">Evidence</span><span class="tval">'+b.evidence+'</span></div>'+
-        '<div class="trow"><span class="tlabel">Recovery</span><span class="tval">'+b.recovery+'</span></div>'+
-      '</div></div>';
-    wrap.appendChild(block);
-  });
-}
-
-/* ================= ANSWER BANK ================= */
+/* ================= ANSWER BANK DATA ================= */
 var qaData = [
   {cluster:"Concept", q:"What actually counts as evidence?", policy:false,
    direct:"Something you can point to and check right now — a register, a notice, a portal.",
@@ -162,33 +101,174 @@ var qaData = [
    next:"Follow your programme's escalation path and inform your coordinator the same day."}
 ];
 
-function renderQA(){
-  var cluster = document.getElementById('clusterSelect').value;
-  var list = document.getElementById('qaList');
-  list.innerHTML = '';
+var ICON_CLOCK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>';
+var ICON_CHAT = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>';
+
+function pageHead(icon, kicker, title){
+  return '<div class="page-head"><span class="phicon">'+icon+'</span>'+
+    '<div class="phtext"><p class="kicker saa-eyebrow">'+kicker+'</p><h2>'+title+'</h2></div></div>';
+}
+
+/* minutes from "h:mm" */
+function mins(t){ var p = t.split(':'); return parseInt(p[0],10)*60 + parseInt(p[1],10); }
+
+/* proportional 5-hour strip; `on` = index in runBlocks to highlight (or -1) */
+function runStrip(on){
+  var html = '<div class="run-strip" aria-hidden="true">';
+  var n = 0;
+  runBlocks.forEach(function(b, i){
+    var t = b.time.split('–');
+    var w = mins(t[1]) - mins(t[0]);
+    if(!b.isBreak) n++;
+    html += '<span class="seg'+(b.isBreak?' brk':'')+(i===on?' on':'')+'" style="flex-grow:'+w+'">'+(b.isBreak?'':n)+'</span>';
+  });
+  html += '</div><div class="run-ticks" aria-hidden="true"><span>0:00</span><span>1:00</span><span>2:00</span><span>3:00</span><span>4:00</span><span>5:00</span></div>';
+  return '<div class="run-map">'+html+'</div>';
+}
+
+/* ================= BUILD GENERATED SLIDES ================= */
+function buildRunSheet(){
+  var ov = document.getElementById('runOverview');
+  var n = 0;
+  runBlocks.forEach(function(b){
+    var li = document.createElement('li');
+    if(b.isBreak){ li.className = 'is-break'; li.innerHTML = '<span class="ot">'+b.time+'</span><span>Break</span>'; }
+    else { n++; li.innerHTML = '<span class="ot">'+b.time+'</span><span><b>'+n+'.</b> '+b.title+'</span>'; }
+    ov.appendChild(li);
+  });
+  ov.insertAdjacentHTML('beforebegin', runStrip(-1));
+
+  var slot = document.getElementById('runSlot');
+  var total = runBlocks.filter(function(b){ return !b.isBreak; }).length;
+  n = 0;
+  runBlocks.forEach(function(b, i){
+    if(b.isBreak) return;
+    n++;
+    var nextB = runBlocks[i+1];
+    var rows = [];
+    if(b.exact) rows.push('<div class="trow"><span class="tlabel">Say exactly</span><span class="tval"><div class="exact-line">'+b.exact+'</div></span></div>');
+    rows.push('<div class="trow"><span class="tlabel">Guidance</span><span class="tval">'+b.guidance+'</span></div>');
+    rows.push('<div class="trow"><span class="tlabel">Learner action</span><span class="tval">'+b.action+'</span></div>');
+    rows.push('<div class="trow"><span class="tlabel">Evidence</span><span class="tval">'+b.evidence+'</span></div>');
+    rows.push('<div class="trow"><span class="tlabel">Recovery</span><span class="tval">'+b.recovery+'</span></div>');
+    /* a block too long for one phone screen is split across two slides */
+    var parts = b.split ? [rows.slice(0, b.split), rows.slice(b.split)] : [rows];
+    parts.forEach(function(part, p){
+      var last = p === parts.length - 1;
+      var brk = (last && nextB && nextB.isBreak) ? '<div class="break-block">Then: '+nextB.time+' — Break</div>' : '';
+      var kicker = 'Run sheet · Block '+n+' of '+total + (p > 0 ? ' · continued' : '');
+      var s = document.createElement('section');
+      s.className = 'slide';
+      s.setAttribute('data-section','2');
+      s.setAttribute('aria-label', b.title + (p > 0 ? ' (continued)' : ''));
+      s.innerHTML = '<div class="card">'+
+        pageHead(ICON_CLOCK, kicker, b.title)+
+        '<div class="tmeta"><span class="ttime">'+b.time+'</span>'+runStrip(i)+'</div>'+
+        '<div class="tbody-inner">'+part.join('')+'</div>'+brk+'</div>';
+      slot.parentNode.insertBefore(s, slot);
+    });
+  });
+}
+
+function buildAnswerBank(){
+  var slot = document.getElementById('qaSlot');
+  var clusters = [];
+  qaData.forEach(function(item){ if(clusters.indexOf(item.cluster) < 0) clusters.push(item.cluster); });
   qaData.forEach(function(item, i){
-    if(cluster !== 'all' && item.cluster !== cluster) return;
-    var el = document.createElement('div');
-    el.className = 'qa-item';
-    el.innerHTML =
-      '<div class="qa-head" onclick="this.parentElement.classList.toggle(\'open\')">'+
-        '<span class="qtext">'+item.q+'</span>'+
-        (item.policy ? '<span class="policy-flag">Needs policy confirmation</span>' : '')+
-        '<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>'+
-      '</div>'+
+    var opts = clusters.map(function(c){
+      return '<option value="'+c+'"'+(c===item.cluster?' selected':'')+'>'+c+'</option>';
+    }).join('');
+    var s = document.createElement('section');
+    s.className = 'slide qa-slide';
+    s.setAttribute('data-section','5');
+    s.setAttribute('data-cluster', item.cluster);
+    s.setAttribute('aria-label', item.q);
+    s.innerHTML = '<div class="card">'+
+      pageHead(ICON_CHAT, 'Answer bank · '+(i+1)+' of '+qaData.length, 'Common learner questions')+
+      '<div class="cluster-row"><label for="cluster'+i+'">Jump to cluster:</label>'+
+      '<select class="cluster-select" id="cluster'+i+'">'+opts+'</select></div>'+
+      '<div class="qa-item open"><div class="qa-head"><span class="qtext">'+item.q+'</span>'+
+        (item.policy ? '<span class="policy-flag">Needs policy confirmation</span>' : '')+'</div>'+
       '<div class="qa-body"><div class="qa-body-inner">'+
         '<div class="ans-row"><span class="albl">Direct</span><span class="aval">'+item.direct+'</span></div>'+
         '<div class="ans-row"><span class="albl">Reason</span><span class="aval">'+item.reason+'</span></div>'+
         '<div class="ans-row"><span class="albl">Next action</span><span class="aval">'+item.next+'</span></div>'+
-      '</div></div>';
-    list.appendChild(el);
+      '</div></div></div></div>';
+    slot.parentNode.insertBefore(s, slot);
+    var sel = s.querySelector('select');
+    sel.addEventListener('change', function(){
+      var c = sel.value;
+      sel.value = item.cluster; /* each slide's own select keeps showing its own cluster */
+      for(var k = 0; k < slides.length; k++){
+        if(slides[k].getAttribute('data-cluster') === c){ go(k); break; }
+      }
+    });
+  });
+}
+
+/* ================= NAVIGATION ================= */
+function firstSlideOf(sec){
+  for(var k = 0; k < slides.length; k++){ if(+slides[k].getAttribute('data-section') === sec) return k; }
+  return 0;
+}
+
+function buildJump(){
+  var sel = document.getElementById('jumpSelect');
+  sel.innerHTML = '';
+  sectionLabels.forEach(function(label, i){
+    var opt = document.createElement('option');
+    opt.value = i;
+    opt.textContent = (i+1) + '. ' + label;
+    sel.appendChild(opt);
+  });
+  sel.addEventListener('change', function(){ go(firstSlideOf(parseInt(sel.value,10))); });
+}
+
+function render(){
+  slides.forEach(function(s, k){ s.classList.toggle('active', k === current); });
+  var sec = +slides[current].getAttribute('data-section');
+  var total = slides.length;
+  document.getElementById('jumpSelect').value = sec;
+  document.getElementById('pageCount').textContent = (current+1) + ' / ' + total;
+  document.getElementById('sectionName').textContent = sectionLabels[sec];
+  document.getElementById('fill').style.width = ((current+1) / total * 100) + '%';
+  document.getElementById('backBtn').disabled = (current === 0);
+  document.getElementById('nextBtn').disabled = (current === total-1);
+}
+
+function go(n){
+  if(n < 0 || n > slides.length-1) return;
+  current = n;
+  render();
+}
+function changePage(delta){ go(current + delta); }
+
+/* self-check tally spans both self-check slides */
+function updateCheck(){
+  var boxes = document.querySelectorAll('.check-item input');
+  var checked = 0;
+  boxes.forEach(function(b){ if(b.checked) checked++; });
+  document.querySelectorAll('.check-progress').forEach(function(p){
+    p.textContent = checked + ' of ' + boxes.length + ' complete';
+    p.classList.toggle('done', checked === boxes.length);
   });
 }
 
 /* ================= INIT ================= */
 document.addEventListener('DOMContentLoaded', function(){
+  buildRunSheet();
+  buildAnswerBank();
+  slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
   buildJump();
-  buildTimeline();
-  renderQA();
+  document.querySelectorAll('.check-item input').forEach(function(b){ b.addEventListener('change', updateCheck); });
+  updateCheck();
+  document.getElementById('backBtn').addEventListener('click', function(){ changePage(-1); });
+  document.getElementById('nextBtn').addEventListener('click', function(){ changePage(1); });
+  document.addEventListener('keydown', function(e){
+    var t = e.target.tagName;
+    if(t === 'INPUT' || t === 'SELECT' || t === 'TEXTAREA') return;
+    if(e.key === 'ArrowRight') changePage(1);
+    if(e.key === 'ArrowLeft') changePage(-1);
+  });
   render();
 });

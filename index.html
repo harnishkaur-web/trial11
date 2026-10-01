@@ -6,210 +6,292 @@
 <title>Facilitator Kit — Check Before You Use — Swift AI Academy</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;700;800&family=Sora:wght@600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div class="app">
 
-  <div class="topbar">
-    <span class="meta">AAI-E-MC1-S03-FAC01 · MC1 / 1.3 · Not counted · PC 4.1–4.5, PC 5.1–5.4</span>
-    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
-      <select class="jump-select" id="jumpSelect" onchange="current=parseInt(this.value);render();"></select>
+  <header class="saa-header chrome">
+    <div class="saa-brand" aria-label="Swift AI Academy">
+      <img src="assets/logo-mark.png" alt="">
+      <span>SWIFT&nbsp;AI&nbsp;ACADEMY</span>
+    </div>
+    <div class="topbar-tools">
+      <select class="jump-select" id="jumpSelect" aria-label="Jump to section"></select>
       <span class="audience-badge">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-3.9 3.1-6 7-6s7 2.1 7 6"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-3.9 3.1-6 7-6s7 2.1 7 6"/></svg>
         For the facilitator
       </span>
     </div>
-  </div>
+    <div class="saa-header-actions">
+      <button type="button" class="saa-icon-btn outline-btn" aria-label="Course outline">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h10M4 18h7"/></svg>
+      </button>
+      <button type="button" class="saa-ghost-pill" aria-label="Close facilitator kit">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+        Close
+      </button>
+    </div>
+  </header>
 
-  <!-- PAGE 0: Cover -->
-  <div class="page active" data-page="0">
-    <div class="cover-sheet">
-      <div class="cover-kicker">Facilitator Kit · Not counted toward learner hours</div>
+  <main class="stage" id="stage">
+
+  <!-- ===================== SECTION 0 · COVER ===================== -->
+  <section class="slide center" data-section="0" aria-label="Cover">
+    <div class="card cover-sheet">
+      <div class="cover-kicker saa-eyebrow">Facilitator Kit · Not counted toward learner hours</div>
       <h1 class="cover-title">Facilitator Kit — Check Before You Use</h1>
       <p class="cover-lede">This kit is for you, the facilitator, not for learners. It covers the session run sheet, the demo script, the wrong-answer-in-class protocol, and an answer bank for common questions.</p>
+      <p class="meta">AAI-E-MC1-S03-FAC01 · MC1 / 1.3 · Not counted · English · PC 4.1–4.5, PC 5.1–5.4</p>
+    </div>
+  </section>
 
+  <section class="slide" data-section="0" aria-label="What's in this kit">
+    <div class="card">
+      <p class="kicker saa-eyebrow">Facilitator Kit</p>
+      <h2>What's in this kit</h2>
       <div class="kit-list">
-        <div class="kit-list-item"><span class="kit-icon" style="background:var(--teal);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><div><b>Before you deliver</b><span>A short self-check to complete before you run this session.</span></div></div>
-        <div class="kit-list-item"><span class="kit-icon" style="background:var(--royal);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><div><b>Session run sheet</b><span>The full block-by-block timeline, with facilitator words, visuals, learner action and recovery paths.</span></div></div>
-        <div class="kit-list-item"><span class="kit-icon" style="background:var(--gold);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span><div><b>Demo script</b><span>The controlled fabrication demo, word for word where it matters.</span></div></div>
-        <div class="kit-list-item"><span class="kit-icon" style="background:var(--coral);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.3 3.9L2.5 17a1.8 1.8 0 0 0 1.5 2.7h16a1.8 1.8 0 0 0 1.5-2.7L13.7 3.9a1.6 1.6 0 0 0-2.8 0z"/></svg></span><div><b>Wrong-answer-in-class protocol</b><span>What to do if the live AI tool gives a genuinely wrong answer, unplanned.</span></div></div>
-        <div class="kit-list-item"><span class="kit-icon" style="background:var(--purple);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span><div><b>Answer bank</b><span>Common learner questions, grouped, with a safe way to say "I will verify this."</span></div></div>
-        <div class="kit-list-item"><span class="kit-icon" style="background:var(--blue);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4v6h6M20 20v-6h-6"/><path d="M20 10a8 8 0 0 0-14.7-4.7M4 14a8 8 0 0 0 14.7 4.7"/></svg></span><div><b>Contingencies</b><span>Access failure, low confidence, fast finishers, shared devices.</span></div></div>
+        <div class="kit-list-item"><span class="kit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><div><b>Before you deliver</b><span>A short self-check to complete before you run this session.</span></div></div>
+        <div class="kit-list-item"><span class="kit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><div><b>Session run sheet</b><span>The full block-by-block timeline, with facilitator words, visuals, learner action and recovery paths.</span></div></div>
+        <div class="kit-list-item"><span class="kit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span><div><b>Demo script</b><span>The controlled fabrication demo, word for word where it matters.</span></div></div>
       </div>
+    </div>
+  </section>
 
+  <section class="slide" data-section="0" aria-label="Also in this kit">
+    <div class="card">
+      <p class="kicker saa-eyebrow">Facilitator Kit</p>
+      <h2>Also in this kit</h2>
+      <div class="kit-list">
+        <div class="kit-list-item"><span class="kit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.3 3.9L2.5 17a1.8 1.8 0 0 0 1.5 2.7h16a1.8 1.8 0 0 0 1.5-2.7L13.7 3.9a1.6 1.6 0 0 0-2.8 0z"/></svg></span><div><b>Wrong-answer-in-class protocol</b><span>What to do if the live AI tool gives a genuinely wrong answer, unplanned.</span></div></div>
+        <div class="kit-list-item"><span class="kit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span><div><b>Answer bank</b><span>Common learner questions, grouped, with a safe way to say "I will verify this."</span></div></div>
+        <div class="kit-list-item"><span class="kit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4v6h6M20 20v-6h-6"/><path d="M20 10a8 8 0 0 0-14.7-4.7M4 14a8 8 0 0 0 14.7 4.7"/></svg></span><div><b>Contingencies</b><span>Access failure, low confidence, fast finishers, shared devices.</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide center" data-section="0" aria-label="Fictional records only">
+    <div class="card">
+      <p class="kicker saa-eyebrow">Before any demo</p>
+      <h2>Fictional records only</h2>
       <div class="privacy-strip">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.3 3.9L2.5 17a1.8 1.8 0 0 0 1.5 2.7h16a1.8 1.8 0 0 0 1.5-2.7L13.7 3.9a1.6 1.6 0 0 0-2.8 0z"/></svg>
         <span>Every demo record here is fictional. Never substitute a real learner's name, marks, phone number or ID into any live demonstration.</span>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- PAGE 1: Before you deliver -->
-  <div class="page" data-page="1">
-    <div class="card">
-    <div class="page-head">
-      <span class="phicon" style="background:var(--teal);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
-      <div class="phtext"><p class="kicker" style="color:var(--teal);">Before you deliver</p><h2>Your self-check</h2></div>
-    </div>
-      <p>Complete this before you run the session. This is for you, not for sign-off by anyone else.</p>
-
-      <div class="check-item"><input type="checkbox" onchange="updateCheck()"><span>I have completed the learner activity myself and can show my own checked example.</span></div>
-      <div class="check-item"><input type="checkbox" onchange="updateCheck()"><span>I have planned my talk time to stay shorter than learner practice time.</span></div>
-      <div class="check-item"><input type="checkbox" onchange="updateCheck()"><span>I have the fictional demo record ready, with the planted errors clearly noted for myself.</span></div>
-      <div class="check-item"><input type="checkbox" onchange="updateCheck()"><span>I know which script lines are exact delivery and which are my own guidance.</span></div>
-      <div class="check-item"><input type="checkbox" onchange="updateCheck()"><span>I have read the wrong-answer-in-class protocol and the answer bank at least once.</span></div>
-      <div class="check-item"><input type="checkbox" onchange="updateCheck()"><span>I know my shared-device rotation and offline fallback plan for this room.</span></div>
-
-      <p class="check-progress" id="checkProgress">0 of 6 complete</p>
-    </div>
-  </div>
-
-  <!-- PAGE 2: Run sheet -->
-  <div class="page" data-page="2">
-    <div class="page-head">
-      <span class="phicon" style="background:var(--royal);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
-      <div class="phtext"><p class="kicker" style="color:var(--royal);">Session run sheet</p><h2>Five hours, block by block</h2></div>
-    </div>
-    <p>Tap a block to open it. Talk time is deliberately shorter than practice time in every block.</p>
-
-    <div class="timeline" id="timelineWrap"></div>
-  </div>
-
-  <!-- PAGE 3: Demo script -->
-  <div class="page" data-page="3">
+  <!-- ===================== SECTION 1 · BEFORE YOU DELIVER ===================== -->
+  <section class="slide" data-section="1" aria-label="Your self-check">
     <div class="card">
       <div class="page-head">
-        <span class="phicon" style="background:var(--gold);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
-        <div class="phtext"><p class="kicker" style="color:#B8790A;">Demo script</p><h2>The controlled fabrication demo</h2></div>
+        <span class="phicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
+        <div class="phtext"><p class="kicker saa-eyebrow">Before you deliver</p><h2>Your self-check</h2></div>
+      </div>
+      <p>Complete this before you run the session. This is for you, not for sign-off by anyone else.</p>
+      <label class="check-item"><input type="checkbox"><span>I have completed the learner activity myself and can show my own checked example.</span></label>
+      <label class="check-item"><input type="checkbox"><span>I have planned my talk time to stay shorter than learner practice time.</span></label>
+      <label class="check-item"><input type="checkbox"><span>I have the fictional demo record ready, with the planted errors clearly noted for myself.</span></label>
+      <p class="check-progress">0 of 6 complete</p>
+    </div>
+  </section>
+
+  <section class="slide" data-section="1" aria-label="Self-check: your plan">
+    <div class="card">
+      <div class="page-head">
+        <span class="phicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span>
+        <div class="phtext"><p class="kicker saa-eyebrow">Before you deliver</p><h2>Self-check: your plan</h2></div>
+      </div>
+      <label class="check-item"><input type="checkbox"><span>I know which script lines are exact delivery and which are my own guidance.</span></label>
+      <label class="check-item"><input type="checkbox"><span>I have read the wrong-answer-in-class protocol and the answer bank at least once.</span></label>
+      <label class="check-item"><input type="checkbox"><span>I know my shared-device rotation and offline fallback plan for this room.</span></label>
+      <p class="check-progress">0 of 6 complete</p>
+    </div>
+  </section>
+
+  <!-- ===================== SECTION 2 · RUN SHEET ===================== -->
+  <section class="slide" data-section="2" aria-label="Five hours, block by block">
+    <div class="card">
+      <div class="page-head">
+        <span class="phicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+        <div class="phtext"><p class="kicker saa-eyebrow">Session run sheet</p><h2>Five hours, block by block</h2></div>
+      </div>
+      <p>Talk time is deliberately shorter than practice time in every block. Each block has its own slide next.</p>
+      <ol class="run-overview" id="runOverview"></ol>
+    </div>
+  </section>
+  <!-- run-sheet block slides are generated here by script.js -->
+  <template id="runSlot"></template>
+
+  <!-- ===================== SECTION 3 · DEMO SCRIPT ===================== -->
+  <section class="slide" data-section="3" aria-label="The controlled fabrication demo">
+    <div class="card">
+      <div class="page-head">
+        <span class="phicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
+        <div class="phtext"><p class="kicker saa-eyebrow">Demo script · 1 of 3</p><h2>The controlled fabrication demo</h2></div>
       </div>
       <p>Use the same fictional record learners will later see in their own materials — the industrial visit note. Gold lines are exact delivery; the rest is your own guidance.</p>
-
-      <div class="exact-line" style="margin-bottom:10px;">"I'm going to show you an AI-written note. Some of it is right. Some of it is wrong on purpose, so you can see how checking actually works."</div>
-      <p class="guidance-line" style="margin-bottom:10px;">Display the AI draft: "On 10 August, 35 trainees from Batch 5A visited Bansal Auto Components. The plant runs a fully automated line needing no manual checks, as confirmed by the visit register."</p>
-      <div class="exact-line" style="margin-bottom:10px;">"Watch what I do in the next 30 seconds. I mark every fact, figure, date, name and source. Then I separate what the register actually supports from what it doesn't."</div>
-      <p class="guidance-line" style="margin-bottom:10px;">Reveal the real register live: 32 trainees, one drill bit worn, register silent on automation. Correct the figure, remove the unsupported claim, keep the source line honest.</p>
-      <div class="exact-line">"Notice I didn't guess. I checked, then I corrected, qualified or removed. That's the whole routine. Now you'll do the same with your own record."</div>
+      <div class="exact-line">"I'm going to show you an AI-written note. Some of it is right. Some of it is wrong on purpose, so you can see how checking actually works."</div>
     </div>
-  </div>
+  </section>
 
-  <!-- PAGE 4: Wrong-answer protocol -->
-  <div class="page" data-page="4">
-    <div class="page-head">
-      <span class="phicon" style="background:var(--coral);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.3 3.9L2.5 17a1.8 1.8 0 0 0 1.5 2.7h16a1.8 1.8 0 0 0 1.5-2.7L13.7 3.9a1.6 1.6 0 0 0-2.8 0z"/></svg></span>
-      <div class="phtext"><p class="kicker" style="color:var(--coral);">Wrong-answer-in-class protocol</p><h2>When the live tool surprises you</h2></div>
-    </div>
-    <p>This is for an unplanned wrong answer — not the demo, which is deliberately wrong.</p>
-
-    <div class="flow">
-      <div class="fstep" data-n="1">
-        <div class="fstep-body"><b>Pause and name it out loud</b><span>"That answer doesn't look right — let's not just accept it. This is exactly the moment this course is about."</span></div>
-      </div>
-      <div class="fstep" data-n="2">
-        <div class="fstep-body"><b>Mark it live, with the class</b><span>Ask: "What in this answer needs checking? A figure, a date, a name?" Get the class to mark it, don't do it alone.</span></div>
-      </div>
-      <div class="fstep" data-n="3">
-        <div class="fstep-body"><b>Check against a real record, or say so honestly</b><span>If a record is on hand, verify together. If not, say plainly: "I will verify this and confirm next session" — and do it.</span>
-          <div class="fbranch">If learners look anxious or start distrusting all AI output: reassure that this is normal AI behaviour, not a broken tool, and it is exactly why the marking routine exists.</div>
-        </div>
-      </div>
-      <div class="fstep" data-n="4">
-        <div class="fstep-body"><b>Turn it into evidence, not just a moment</b><span>Note what happened in your facilitator log. If it affects a graded task, follow your escalation path rather than deciding alone.</span></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- PAGE 5: Answer bank -->
-  <div class="page" data-page="5">
+  <section class="slide" data-section="3" aria-label="Show the AI draft">
     <div class="card">
       <div class="page-head">
-        <span class="phicon" style="background:var(--purple);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
-        <div class="phtext"><p class="kicker" style="color:var(--purple);">Answer bank</p><h2>Common learner questions</h2></div>
+        <span class="phicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
+        <div class="phtext"><p class="kicker saa-eyebrow">Demo script · 2 of 3</p><h2>Show the AI draft</h2></div>
       </div>
-
-      <div class="cluster-row">
-        <label for="clusterSelect">Filter by cluster:</label>
-        <select class="cluster-select" id="clusterSelect" onchange="renderQA()">
-          <option value="all">All clusters</option>
-          <option value="Concept">Concept</option>
-          <option value="Access">Access</option>
-          <option value="Privacy">Privacy</option>
-          <option value="Accuracy">Accuracy</option>
-          <option value="Language">Language</option>
-          <option value="Assessment">Assessment</option>
-          <option value="Escalation">Escalation</option>
-        </select>
-      </div>
-
-      <div id="qaList"></div>
+      <p class="guidance-line">Display the AI draft: "On 10 August, 35 trainees from Batch 5A visited Bansal Auto Components. The plant runs a fully automated line needing no manual checks, as confirmed by the visit register."</p>
+      <div class="exact-line">"Watch what I do in the next 30 seconds. I mark every fact, figure, date, name and source. Then I separate what the register actually supports from what it doesn't."</div>
     </div>
-  </div>
+  </section>
 
-  <!-- PAGE 6: Contingencies -->
-  <div class="page" data-page="6">
-    <div class="page-head">
-      <span class="phicon" style="background:var(--blue);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4v6h6M20 20v-6h-6"/><path d="M20 10a8 8 0 0 0-14.7-4.7M4 14a8 8 0 0 0 14.7 4.7"/></svg></span>
-      <div class="phtext"><p class="kicker" style="color:var(--blue);">Contingencies</p><h2>When something doesn't go to plan</h2></div>
+  <section class="slide" data-section="3" aria-label="Reveal the real register">
+    <div class="card">
+      <div class="page-head">
+        <span class="phicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
+        <div class="phtext"><p class="kicker saa-eyebrow">Demo script · 3 of 3</p><h2>Reveal the real register</h2></div>
+      </div>
+      <p class="guidance-line">Reveal the real register live: 32 trainees, one drill bit worn, register silent on automation. Correct the figure, remove the unsupported claim, keep the source line honest.</p>
+      <div class="exact-line">"Notice I didn't guess. I checked, then I corrected, qualified or removed. That's the whole routine. Now you'll do the same with your own record."</div>
     </div>
-    <div class="cont-grid">
-      <div class="cont-card" style="background:var(--blue-tint);border:1px solid #C6DEF2;">
-        <span class="cicon" style="background:var(--blue);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h6l-1 8 9-12h-6z"/></svg></span>
-        <b>Access failure</b>
-        <span>Tool or internet is down. Switch to the printed demo record and run the marking routine on paper. Learners complete the write-up when access returns.</span>
+  </section>
+
+  <!-- ===================== SECTION 4 · WRONG-ANSWER PROTOCOL ===================== -->
+  <section class="slide" data-section="4" aria-label="When the live tool surprises you">
+    <div class="card">
+      <div class="page-head">
+        <span class="phicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.3 3.9L2.5 17a1.8 1.8 0 0 0 1.5 2.7h16a1.8 1.8 0 0 0 1.5-2.7L13.7 3.9a1.6 1.6 0 0 0-2.8 0z"/></svg></span>
+        <div class="phtext"><p class="kicker saa-eyebrow">Wrong-answer-in-class protocol</p><h2>When the live tool surprises you</h2></div>
       </div>
-      <div class="cont-card" style="background:var(--purple-tint);border:1px solid #DCD0F5;">
-        <span class="cicon" style="background:var(--purple);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-3.9 3.1-6 7-6s7 2.1 7 6"/></svg></span>
-        <b>Low confidence</b>
-        <span>A learner is unsure how to mark or correct. Pair them with a batchmate who has finished one round, rather than doing it for them.</span>
-      </div>
-      <div class="cont-card" style="background:var(--teal-tint);border:1px solid #BFE8E3;">
-        <span class="cicon" style="background:var(--teal);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h6l-1 8 9-12h-6z"/></svg></span>
-        <b>Fast finisher</b>
-        <span>Give them the retry example from the Practice Bot to attempt on their own, or ask them to help a peer explain their marking.</span>
-      </div>
-      <div class="cont-card" style="background:var(--coral-tint);border:1px solid #EFC6B9;">
-        <span class="cicon" style="background:var(--coral);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></span>
-        <b>Shared device</b>
-        <span>Rotate every 10 minutes on a visible timer. The learner not on the device marks on paper and swaps in to correct.</span>
+      <p>This is for an unplanned wrong answer — not the demo, which is deliberately wrong.</p>
+      <div class="flow">
+        <div class="fstep" data-n="1">
+          <div class="fstep-body"><b>Pause and name it out loud</b><span>"That answer doesn't look right — let's not just accept it. This is exactly the moment this course is about."</span></div>
+        </div>
+        <div class="fstep" data-n="2">
+          <div class="fstep-body"><b>Mark it live, with the class</b><span>Ask: "What in this answer needs checking? A figure, a date, a name?" Get the class to mark it, don't do it alone.</span></div>
+        </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- PAGE 7: Closing -->
-  <div class="page" data-page="7">
-    <div class="page-head">
-      <span class="phicon" style="background:var(--navy);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span>
-      <div class="phtext"><p class="kicker" style="color:var(--navy);">Before you close the session</p><h2>Evidence to collect</h2></div>
+  <section class="slide" data-section="4" aria-label="Check it honestly">
+    <div class="card">
+      <div class="page-head">
+        <span class="phicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.3 3.9L2.5 17a1.8 1.8 0 0 0 1.5 2.7h16a1.8 1.8 0 0 0 1.5-2.7L13.7 3.9a1.6 1.6 0 0 0-2.8 0z"/></svg></span>
+        <div class="phtext"><p class="kicker saa-eyebrow">Wrong-answer protocol · step 3</p><h2>Check it honestly</h2></div>
+      </div>
+      <div class="flow">
+        <div class="fstep" data-n="3">
+          <div class="fstep-body"><b>Check against a real record, or say so honestly</b><span>If a record is on hand, verify together. If not, say plainly: "I will verify this and confirm next session" — and do it.</span>
+            <div class="fbranch">If learners look anxious or start distrusting all AI output: reassure that this is normal AI behaviour, not a broken tool, and it is exactly why the marking routine exists.</div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="recap-grid">
-      <div class="recap-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span>Your example</span></div>
-      <div class="recap-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 12h8M8 16h5"/></svg><span>Learner marks</span></div>
-      <div class="recap-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-3.9 3.1-6 7-6s7 2.1 7 6"/></svg><span>Peer sign-off</span></div>
-      <div class="recap-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span>Gate status</span></div>
+  </section>
+
+  <section class="slide" data-section="4" aria-label="Turn it into evidence">
+    <div class="card">
+      <div class="page-head">
+        <span class="phicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01M10.3 3.9L2.5 17a1.8 1.8 0 0 0 1.5 2.7h16a1.8 1.8 0 0 0 1.5-2.7L13.7 3.9a1.6 1.6 0 0 0-2.8 0z"/></svg></span>
+        <div class="phtext"><p class="kicker saa-eyebrow">Wrong-answer protocol · step 4</p><h2>Turn it into evidence</h2></div>
+      </div>
+      <div class="flow">
+        <div class="fstep" data-n="4">
+          <div class="fstep-body"><b>Turn it into evidence, not just a moment</b><span>Note what happened in your facilitator log. If it affects a graded task, follow your escalation path rather than deciding alone.</span></div>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <div class="transfer">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
-      <p><strong>Element 4 is gated.</strong> Before you release any learner from this section, confirm their Rulebook page, Lab tasks and Practice Bot rounds are actually complete — not just attempted.</p>
+  <!-- ===================== SECTION 5 · ANSWER BANK ===================== -->
+  <!-- one slide per question, generated here by script.js -->
+  <template id="qaSlot"></template>
+
+  <!-- ===================== SECTION 6 · CONTINGENCIES ===================== -->
+  <section class="slide" data-section="6" aria-label="When something doesn't go to plan">
+    <div class="card">
+      <div class="page-head">
+        <span class="phicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4v6h6M20 20v-6h-6"/><path d="M20 10a8 8 0 0 0-14.7-4.7M4 14a8 8 0 0 0 14.7 4.7"/></svg></span>
+        <div class="phtext"><p class="kicker saa-eyebrow">Contingencies · 1 of 2</p><h2>When something doesn't go to plan</h2></div>
+      </div>
+      <div class="cont-grid">
+        <div class="cont-card">
+          <span class="cicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h6l-1 8 9-12h-6z"/></svg></span>
+          <b>Access failure</b>
+          <span>Tool or internet is down. Switch to the printed demo record and run the marking routine on paper. Learners complete the write-up when access returns.</span>
+        </div>
+        <div class="cont-card">
+          <span class="cicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-3.9 3.1-6 7-6s7 2.1 7 6"/></svg></span>
+          <b>Low confidence</b>
+          <span>A learner is unsure how to mark or correct. Pair them with a batchmate who has finished one round, rather than doing it for them.</span>
+        </div>
+      </div>
     </div>
-  </div>
+  </section>
 
-  <div class="nav-row">
-    <button class="nav-btn" id="backBtn" onclick="changePage(-1)">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-      Back
-    </button>
-    <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#8892C2;" id="pageCount">1 / 8</span>
-    <button class="nav-btn primary" id="nextBtn" onclick="changePage(1)">
-      Next
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-    </button>
-  </div>
+  <section class="slide" data-section="6" aria-label="Pace and device issues">
+    <div class="card">
+      <div class="page-head">
+        <span class="phicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4v6h6M20 20v-6h-6"/><path d="M20 10a8 8 0 0 0-14.7-4.7M4 14a8 8 0 0 0 14.7 4.7"/></svg></span>
+        <div class="phtext"><p class="kicker saa-eyebrow">Contingencies · 2 of 2</p><h2>Pace and device issues</h2></div>
+      </div>
+      <div class="cont-grid">
+        <div class="cont-card">
+          <span class="cicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h6l-1 8 9-12h-6z"/></svg></span>
+          <b>Fast finisher</b>
+          <span>Give them the retry example from the Practice Bot to attempt on their own, or ask them to help a peer explain their marking.</span>
+        </div>
+        <div class="cont-card">
+          <span class="cicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></span>
+          <b>Shared device</b>
+          <span>Rotate every 10 minutes on a visible timer. The learner not on the device marks on paper and swaps in to correct.</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <footer>
-    <span>Swift AI Academy</span>
-    <span>English · PC 4.1–4.5 · PC 5.1–5.4</span>
+  <!-- ===================== SECTION 7 · CLOSING ===================== -->
+  <section class="slide" data-section="7" aria-label="Evidence to collect">
+    <div class="card">
+      <div class="page-head">
+        <span class="phicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span>
+        <div class="phtext"><p class="kicker saa-eyebrow">Before you close the session</p><h2>Evidence to collect</h2></div>
+      </div>
+      <div class="recap-grid">
+        <div class="recap-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><span>Your example</span></div>
+        <div class="recap-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 12h8M8 16h5"/></svg><span>Learner marks</span></div>
+        <div class="recap-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-3.9 3.1-6 7-6s7 2.1 7 6"/></svg><span>Peer sign-off</span></div>
+        <div class="recap-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span>Gate status</span></div>
+      </div>
+      <div class="transfer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+        <p><strong>Element 4 is gated.</strong> Before you release any learner from this section, confirm their Rulebook page, Lab tasks and Practice Bot rounds are actually complete — not just attempted.</p>
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <footer class="bar">
+    <div class="track" aria-hidden="true"><div class="fill" id="fill"></div></div>
+    <div class="bar-row">
+      <button type="button" class="nav-btn saa-btn-secondary" id="backBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+        Back
+      </button>
+      <div class="bar-mid">
+        <span class="page-count" id="pageCount" aria-live="polite">1 / 1</span>
+        <span class="section-name" id="sectionName"></span>
+      </div>
+      <button type="button" class="nav-btn primary saa-btn-primary" id="nextBtn">
+        Next
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+    </div>
   </footer>
 </div>
 
